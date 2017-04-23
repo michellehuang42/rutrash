@@ -56,6 +56,7 @@ while(True):
 	# colors
 	# light green: 144 40% 70%, 102 102 179
 	# dark green: 144 47% 40%, 102 120 102
+	# dark green2: 144 50% 24%
 
 # When everything done, release the capture
 cap.release()

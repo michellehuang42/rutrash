@@ -16,6 +16,10 @@ args = vars(ap.parse_args())
 # define the lower and upper boundaries of the "green"
 # ball in the HSV color space, then initialize the
 # list of tracked points
+# greenUpper = (139/100*256, 34/100*256, 80/100*256)
+# greenLower = (109/360*256, 34/100*256, 33/100*256)
+# greenUpper = (160/100*256, 40/100*256, 90/100*256)
+# greenLower = (100/360*256, 30/100*256, 28/100*256)
 greenLower = (29, 86, 6)
 greenUpper = (64, 255, 255)
 pts = deque(maxlen=args["buffer"])
@@ -28,6 +32,9 @@ if not args.get("video", False):
 # otherwise, grab a reference to the video file
 else:
 	camera = cv2.VideoCapture(args["video"])
+
+
+
 
 # keep looping
 while True:
