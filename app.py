@@ -2,7 +2,7 @@
 import numpy as np
 import argparse
 import cv2
-from cv2 import cv
+#from cv2 import cv
 import time
 
 cap = cv2.VideoCapture(0) # Set Capture Device, in case of a USB Webcam try 1, or give -1 to get a list of available devices
@@ -10,6 +10,8 @@ cap = cv2.VideoCapture(0) # Set Capture Device, in case of a USB Webcam try 1, o
 # cap.set(3,1280)
 # cap.set(4,720)
 
+lightgreen = (102, 102, 179)
+darkgreen = (102, 120, 102)
 
 while(True):
 	ret, frame = cap.read()
@@ -29,7 +31,7 @@ while(True):
 
 	gray = cv2.dilate(gray,kernel,iterations = 1)
 
-	circles = cv2.HoughCircles(gray, cv.CV_HOUGH_GRADIENT, 1, 200, param1=30, param2=45, minRadius=0, maxRadius=0)
+	circles = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, 200, param1=30, param2=45, minRadius=0, maxRadius=0)
 
 	if circles is not None:
 		circles = np.round(circles[0, :]).astype("int")
@@ -38,18 +40,22 @@ while(True):
 			cv2.circle(output, (x, y), r, (0, 255, 0), 4)
 			# cv2.rectangle(output, (x - 5, y - 5), (x + 5, y + 5), (0, 128, 255), -1)
 			#time.sleep(0.5)
-			# print "Column Number: "
-			# print x
-			# print "Row Number: "
-			# print y
-			# print "Radius is: "
-			# print r
+			print "Column Number: "
+			print x
+			print "Row Number: "
+			print y
+			print "Radius is: "
+			print r
 
 	# Display the resulting frame
-	# 	cv2.imshow('gray',gray)
-    	cv2.imshow('frame',output)
+		cv2.imshow('gray',gray)
+   	cv2.imshow('frame',output)
  	if cv2.waitKey(1) & 0xFF == ord('q'):
 		break
+
+	# colors
+	# light green: 144 40% 70%, 102 102 179
+	# dark green: 144 47% 40%, 102 120 102
 
 # When everything done, release the capture
 cap.release()
